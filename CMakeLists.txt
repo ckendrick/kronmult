@@ -7,6 +7,7 @@
 
     option (USE_GPU "Use CUDA for gpu support" OFF)
     if (USE_GPU)
+        set(GPU_ARCH "70" CACHE STRING "NVIDIA GPU Architecture code")
         enable_language (CUDA)
     endif ()
 
@@ -61,7 +62,7 @@
             target_compile_features (${target} PUBLIC cuda_std_14)
             get_target_property (SOURCES ${target} SOURCES)
             set_source_files_properties (${SOURCES} PROPERTIES LANGUAGE CUDA)
-            set_target_properties (${target} PROPERTIES CUDA_ARCHITECTURES 60)
+            set_target_properties (${target} PROPERTIES CUDA_ARCHITECTURES ${GPU_ARCH})
         endif ()
     endmacro ()
 
